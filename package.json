@@ -1,0 +1,71 @@
+{
+  "name": "uno-web-app",
+  "version": "1.0.0",
+  "description": "Uno web services",
+  "engines": {
+    "node": ">= 7.0.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build-client": "webpack",
+    "build-client-watch": "webpack -w",
+    "deploy": "script/deploy",
+    "lint": "eslint ./ --ignore-path .gitignore",
+    "lint-fix": "npm run lint -- --fix",
+    "precommit": "# lint-staged # un-comment to enable",
+    "prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
+    "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
+    "postinstall": "touch secrets.js",
+    "seed": "node script/seed.js",
+    "start": "node server",
+    "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
+    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
+    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "npm run lint-fix",
+      "git add"
+    ],
+    "*.{css,scss,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "author": "Raysa Aurrecochea",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "compression": "^1.7.3",
+    "connect-session-sequelize": "^4.1.0",
+    "express": "^4.16.3",
+    "express-session": "^1.15.1",
+    "history": "^4.6.3",
+    "morgan": "^1.8.1",
+    "passport": "^0.3.2",
+    "passport-google-oauth": "^1.0.0",
+    "pg": "^6.1.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.38.0",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "^1.15.0",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^8.0.0-beta.4",
+    "chai": "^3.5.0",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-react": "^7.10.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.3",
+    "npm-merge-driver": "^2.3.5",
+    "prettier": "1.11.1",
+    "supertest": "^3.1.0"
+  }
+}
