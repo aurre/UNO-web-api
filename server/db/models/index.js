@@ -1,6 +1,6 @@
-const Game = require('./game')
-const Player = require('./player')
-const Session = require('./session')
+const Game = require('./game');
+const Player = require('./player');
+const Session = require('./session');
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -9,8 +9,8 @@ const Session = require('./session')
  *    BlogPost.belongsTo(User)
  */
 
-Game.hasMany(Session, {as: 'sessionPlayed', constraints: false}) // all session has a gameId
-Player.hasMany(Session, {as: 'playedHand', constraints: false}) // all session has a playerId
+Game.hasMany(Session); // all session has a gameId
+Player.hasMany(Session); // all session has a playerId
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -21,5 +21,5 @@ Player.hasMany(Session, {as: 'playedHand', constraints: false}) // all session h
 module.exports = {
   Game,
   Player,
-  Session
-}
+  Session,
+};
