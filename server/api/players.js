@@ -23,3 +23,16 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    Player.destroy({
+      where: {
+         id: req.params.id
+      }
+    })
+    res.sendStatus(204);
+  } catch (err) {
+    next(err)
+  }
+})
